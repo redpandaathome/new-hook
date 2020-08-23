@@ -1,26 +1,75 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component, useState} from 'react';
+// import React, {Component} from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [count, setCount] = useState(0);
+  const incrementItem = () => setCount(count+1);
+
+  const [email, setEmail] =useState("");
+  const updateEmail = e => {
+    const {
+      target: {value}
+    } = e;
+    setEmail(value);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {count}
+      <button onClick={incrementItem}>Increment</button>
+      <button onClick={()=>setCount(count-1)}>Decrement</button>
+      <input placeholder="Email" value={email} onChange={updateEmail}/>
+    </>
+  )
 }
+
+// # V2.
+// class App extends Component {
+//   state = {
+//     count: 0
+//   };
+  
+//   incrementItem = () => {
+//     this.setState(state => {
+//       return {
+//         count: state.count + 1
+//       };
+//     });
+//   };
+
+//   render() {
+//     const {count} = this.state;
+//     return (
+//       <>
+//       <div>{count}</div>
+//       <button onClick={this.incrementItem}>Increment</button>
+//       </>
+//     );
+//   }
+// }
+
+
+// #V1.
+// class App extends Component {
+//   state = {
+//     count: 0
+//   };
+  
+//   modify = n => {
+//     this.setState({
+//       count: n
+//     });
+//   };
+
+//   render() {
+//     const {count} = this.state;
+//     return (
+//       <>
+//       <div>{count}</div>
+//       <button onClick={()=> this.modify(count+1)}>Increment</button>
+//       </>
+//     );
+//   }
+// }
 
 export default App;
